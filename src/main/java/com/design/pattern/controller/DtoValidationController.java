@@ -1,5 +1,6 @@
 package com.design.pattern.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -23,14 +24,14 @@ public class DtoValidationController {
 	private static final Logger logger = LoggerFactory.getLogger(DtoValidationController.class);
 	
 	@Autowired
-	DtoValidationService dtoValiidationService;
+	DtoValidationService dtoValidationService;
 	
 	@PostMapping("/create_user")
-	public CommonResponse createUser(@Valid @RequestBody UserInfo userInfo) {
+	public CommonResponse createUser(@Valid @RequestBody UserInfo userInfo, HttpServletRequest httpRequest) {
 		logger.info("entry in create user");
 		CommonResponse commonResponse = null;
 		try {
-			commonResponse = CommonResponse.success(commonResponse);
+			commonResponse = CommonResponse.success(dtoValidationService.createUser(userInfo, httpRequest));
 		} catch (Exception e) {
 			e.getMessage();
 			commonResponse = CommonResponse.failure(e.getMessage());
