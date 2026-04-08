@@ -15,6 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserInfo {
 	
+	@NotNull(message = "Id mmust be not null")
+	private Long id;
+	
 	@NotBlank(message = "Please enter name")
 	@Size(min = 2, max = 55, message = "Please enter valid name")
 	private String name;
